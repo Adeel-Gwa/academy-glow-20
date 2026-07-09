@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SlotsRouteImport } from './routes/slots'
+import { Route as MockTestsRouteImport } from './routes/mock-tests'
 import { Route as AttendanceRouteImport } from './routes/attendance'
+import { Route as ActivitiesRouteImport } from './routes/activities'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StudentsIndexRouteImport } from './routes/students.index'
 import { Route as StudentsIdRouteImport } from './routes/students.$id'
@@ -20,9 +22,19 @@ const SlotsRoute = SlotsRouteImport.update({
   path: '/slots',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MockTestsRoute = MockTestsRouteImport.update({
+  id: '/mock-tests',
+  path: '/mock-tests',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AttendanceRoute = AttendanceRouteImport.update({
   id: '/attendance',
   path: '/attendance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivitiesRoute = ActivitiesRouteImport.update({
+  id: '/activities',
+  path: '/activities',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -43,14 +55,18 @@ const StudentsIdRoute = StudentsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
   '/attendance': typeof AttendanceRoute
+  '/mock-tests': typeof MockTestsRoute
   '/slots': typeof SlotsRoute
   '/students/$id': typeof StudentsIdRoute
   '/students/': typeof StudentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
   '/attendance': typeof AttendanceRoute
+  '/mock-tests': typeof MockTestsRoute
   '/slots': typeof SlotsRoute
   '/students/$id': typeof StudentsIdRoute
   '/students': typeof StudentsIndexRoute
@@ -58,20 +74,38 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
   '/attendance': typeof AttendanceRoute
+  '/mock-tests': typeof MockTestsRoute
   '/slots': typeof SlotsRoute
   '/students/$id': typeof StudentsIdRoute
   '/students/': typeof StudentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/attendance' | '/slots' | '/students/$id' | '/students/'
+  fullPaths:
+    | '/'
+    | '/activities'
+    | '/attendance'
+    | '/mock-tests'
+    | '/slots'
+    | '/students/$id'
+    | '/students/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/attendance' | '/slots' | '/students/$id' | '/students'
+  to:
+    | '/'
+    | '/activities'
+    | '/attendance'
+    | '/mock-tests'
+    | '/slots'
+    | '/students/$id'
+    | '/students'
   id:
     | '__root__'
     | '/'
+    | '/activities'
     | '/attendance'
+    | '/mock-tests'
     | '/slots'
     | '/students/$id'
     | '/students/'
@@ -79,7 +113,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivitiesRoute: typeof ActivitiesRoute
   AttendanceRoute: typeof AttendanceRoute
+  MockTestsRoute: typeof MockTestsRoute
   SlotsRoute: typeof SlotsRoute
   StudentsIdRoute: typeof StudentsIdRoute
   StudentsIndexRoute: typeof StudentsIndexRoute
@@ -94,11 +130,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SlotsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mock-tests': {
+      id: '/mock-tests'
+      path: '/mock-tests'
+      fullPath: '/mock-tests'
+      preLoaderRoute: typeof MockTestsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/attendance': {
       id: '/attendance'
       path: '/attendance'
       fullPath: '/attendance'
       preLoaderRoute: typeof AttendanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activities': {
+      id: '/activities'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof ActivitiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -127,7 +177,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivitiesRoute: ActivitiesRoute,
   AttendanceRoute: AttendanceRoute,
+  MockTestsRoute: MockTestsRoute,
   SlotsRoute: SlotsRoute,
   StudentsIdRoute: StudentsIdRoute,
   StudentsIndexRoute: StudentsIndexRoute,
