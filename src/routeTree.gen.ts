@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SlotsRouteImport } from './routes/slots'
+import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as MockTestsRouteImport } from './routes/mock-tests'
+import { Route as FeesRouteImport } from './routes/fees'
 import { Route as AttendanceRouteImport } from './routes/attendance'
 import { Route as ActivitiesRouteImport } from './routes/activities'
 import { Route as IndexRouteImport } from './routes/index'
@@ -22,9 +24,19 @@ const SlotsRoute = SlotsRouteImport.update({
   path: '/slots',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MockTestsRoute = MockTestsRouteImport.update({
   id: '/mock-tests',
   path: '/mock-tests',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeesRoute = FeesRouteImport.update({
+  id: '/fees',
+  path: '/fees',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AttendanceRoute = AttendanceRouteImport.update({
@@ -57,7 +69,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/activities': typeof ActivitiesRoute
   '/attendance': typeof AttendanceRoute
+  '/fees': typeof FeesRoute
   '/mock-tests': typeof MockTestsRoute
+  '/notifications': typeof NotificationsRoute
   '/slots': typeof SlotsRoute
   '/students/$id': typeof StudentsIdRoute
   '/students/': typeof StudentsIndexRoute
@@ -66,7 +80,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/activities': typeof ActivitiesRoute
   '/attendance': typeof AttendanceRoute
+  '/fees': typeof FeesRoute
   '/mock-tests': typeof MockTestsRoute
+  '/notifications': typeof NotificationsRoute
   '/slots': typeof SlotsRoute
   '/students/$id': typeof StudentsIdRoute
   '/students': typeof StudentsIndexRoute
@@ -76,7 +92,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/activities': typeof ActivitiesRoute
   '/attendance': typeof AttendanceRoute
+  '/fees': typeof FeesRoute
   '/mock-tests': typeof MockTestsRoute
+  '/notifications': typeof NotificationsRoute
   '/slots': typeof SlotsRoute
   '/students/$id': typeof StudentsIdRoute
   '/students/': typeof StudentsIndexRoute
@@ -87,7 +105,9 @@ export interface FileRouteTypes {
     | '/'
     | '/activities'
     | '/attendance'
+    | '/fees'
     | '/mock-tests'
+    | '/notifications'
     | '/slots'
     | '/students/$id'
     | '/students/'
@@ -96,7 +116,9 @@ export interface FileRouteTypes {
     | '/'
     | '/activities'
     | '/attendance'
+    | '/fees'
     | '/mock-tests'
+    | '/notifications'
     | '/slots'
     | '/students/$id'
     | '/students'
@@ -105,7 +127,9 @@ export interface FileRouteTypes {
     | '/'
     | '/activities'
     | '/attendance'
+    | '/fees'
     | '/mock-tests'
+    | '/notifications'
     | '/slots'
     | '/students/$id'
     | '/students/'
@@ -115,7 +139,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ActivitiesRoute: typeof ActivitiesRoute
   AttendanceRoute: typeof AttendanceRoute
+  FeesRoute: typeof FeesRoute
   MockTestsRoute: typeof MockTestsRoute
+  NotificationsRoute: typeof NotificationsRoute
   SlotsRoute: typeof SlotsRoute
   StudentsIdRoute: typeof StudentsIdRoute
   StudentsIndexRoute: typeof StudentsIndexRoute
@@ -130,11 +156,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SlotsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/mock-tests': {
       id: '/mock-tests'
       path: '/mock-tests'
       fullPath: '/mock-tests'
       preLoaderRoute: typeof MockTestsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fees': {
+      id: '/fees'
+      path: '/fees'
+      fullPath: '/fees'
+      preLoaderRoute: typeof FeesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/attendance': {
@@ -179,7 +219,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ActivitiesRoute: ActivitiesRoute,
   AttendanceRoute: AttendanceRoute,
+  FeesRoute: FeesRoute,
   MockTestsRoute: MockTestsRoute,
+  NotificationsRoute: NotificationsRoute,
   SlotsRoute: SlotsRoute,
   StudentsIdRoute: StudentsIdRoute,
   StudentsIndexRoute: StudentsIndexRoute,
