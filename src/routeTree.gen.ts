@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SlotsRouteImport } from './routes/slots'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as MockTestsRouteImport } from './routes/mock-tests'
 import { Route as FeesRouteImport } from './routes/fees'
@@ -22,6 +24,16 @@ import { Route as StudentsIdRouteImport } from './routes/students.$id'
 const SlotsRoute = SlotsRouteImport.update({
   id: '/slots',
   path: '/slots',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NotificationsRoute = NotificationsRouteImport.update({
@@ -72,6 +84,8 @@ export interface FileRoutesByFullPath {
   '/fees': typeof FeesRoute
   '/mock-tests': typeof MockTestsRoute
   '/notifications': typeof NotificationsRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/slots': typeof SlotsRoute
   '/students/$id': typeof StudentsIdRoute
   '/students/': typeof StudentsIndexRoute
@@ -83,6 +97,8 @@ export interface FileRoutesByTo {
   '/fees': typeof FeesRoute
   '/mock-tests': typeof MockTestsRoute
   '/notifications': typeof NotificationsRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/slots': typeof SlotsRoute
   '/students/$id': typeof StudentsIdRoute
   '/students': typeof StudentsIndexRoute
@@ -95,6 +111,8 @@ export interface FileRoutesById {
   '/fees': typeof FeesRoute
   '/mock-tests': typeof MockTestsRoute
   '/notifications': typeof NotificationsRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/slots': typeof SlotsRoute
   '/students/$id': typeof StudentsIdRoute
   '/students/': typeof StudentsIndexRoute
@@ -108,6 +126,8 @@ export interface FileRouteTypes {
     | '/fees'
     | '/mock-tests'
     | '/notifications'
+    | '/reports'
+    | '/settings'
     | '/slots'
     | '/students/$id'
     | '/students/'
@@ -119,6 +139,8 @@ export interface FileRouteTypes {
     | '/fees'
     | '/mock-tests'
     | '/notifications'
+    | '/reports'
+    | '/settings'
     | '/slots'
     | '/students/$id'
     | '/students'
@@ -130,6 +152,8 @@ export interface FileRouteTypes {
     | '/fees'
     | '/mock-tests'
     | '/notifications'
+    | '/reports'
+    | '/settings'
     | '/slots'
     | '/students/$id'
     | '/students/'
@@ -142,6 +166,8 @@ export interface RootRouteChildren {
   FeesRoute: typeof FeesRoute
   MockTestsRoute: typeof MockTestsRoute
   NotificationsRoute: typeof NotificationsRoute
+  ReportsRoute: typeof ReportsRoute
+  SettingsRoute: typeof SettingsRoute
   SlotsRoute: typeof SlotsRoute
   StudentsIdRoute: typeof StudentsIdRoute
   StudentsIndexRoute: typeof StudentsIndexRoute
@@ -154,6 +180,20 @@ declare module '@tanstack/react-router' {
       path: '/slots'
       fullPath: '/slots'
       preLoaderRoute: typeof SlotsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/notifications': {
@@ -222,6 +262,8 @@ const rootRouteChildren: RootRouteChildren = {
   FeesRoute: FeesRoute,
   MockTestsRoute: MockTestsRoute,
   NotificationsRoute: NotificationsRoute,
+  ReportsRoute: ReportsRoute,
+  SettingsRoute: SettingsRoute,
   SlotsRoute: SlotsRoute,
   StudentsIdRoute: StudentsIdRoute,
   StudentsIndexRoute: StudentsIndexRoute,
